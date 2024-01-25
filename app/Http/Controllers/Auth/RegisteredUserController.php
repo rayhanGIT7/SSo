@@ -13,25 +13,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\Str;
 class RegisteredUserController extends Controller
 {
-    public function Googlelogin(){
-        $user = Socialite::driver('google')->user();
-        $findUser = User::where('email', $user->email)->first();
 
-        if (!$findUser) {
-            $findUser = new User();
-            $findUser->name = $user->name;
-            $findUser->email = $user->email;
-            $findUser->password = bcrypt(Str::random(16)); // Generating a secure random password
-            $findUser->dob = '2000-12-12'; // Adjust the format as needed
-            $findUser->save();
-        }
 
-        session()->put('id', $findUser->id);
-        session()->put('type', $findUser->type); // Make sure 'type' is the correct field in your User model
-        return redirect('/home');
-    }
+
+
 
     public function create(): View
     {

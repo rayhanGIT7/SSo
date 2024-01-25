@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
-        
-    Route::get('Googlelogin', [RegisteredUserController::class, 'Googlelogin'])
-        ->name('Googlelogin');
+// github route
+
+
+
+
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 

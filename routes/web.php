@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProviderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,20 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
+
+
+// GitHub Route
+Route::get('auth/github', [ProviderController::class, 'GitHubLogin']);
+
+Route::get('auth/github/callback',[ProviderController::class,'callbackFromGithub']);
+
+// Google route
+Route::get('auth/google', [ProviderController::class, 'GoogleLogin']);
+
+
+Route::get('auth/google/callback',[ProviderController::class,'callbackFromGoogle']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
